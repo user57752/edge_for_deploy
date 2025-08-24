@@ -1,0 +1,66 @@
+name: Obfuscate the codes
+on:
+    workflow_dispatch:
+
+jobs:
+  obfuscate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      - name: Install Dependencies 
+        run: npm install -g javascript-obfuscator
+
+      - name: Check the backup files
+        run: |
+          if [ ! -f _worker.js.backup ]; then
+            echo "backup file _worker.js.backup does not exist, creating..."
+            cp _worker.js _worker.js.backup
+          fi
+
+      - name: Loading raw code...
+        run: |
+          curl -o _oworker.js https://raw.githubusercontent.com/use57752/edge_for_deploy/main/_worker.js
+
+      - name: Obfuscate
+        run: |
+          javascript-obfuscator _oworker.js --output _worker.js \
+          --compact true \
+          --control-flow-flattening true \
+          --control-flow-flattening-threshold 1 \
+          --dead-code-injection true \
+          --dead-code-injection-threshold 1 \
+          --identifier-names-generator hexadecimal \
+          --rename-globals true \
+          --string-array true \
+          --string-array-encoding 'rc4' \
+          --string-array-threshold 1 \
+          --transform-object-keys true \
+          --unicode-escape-sequence true
+
+      - name: Submit Changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add _worker.js _worker.js.backup
+          if git diff --cached --quiet; then
+            echo "No files have changed, skip."
+          else
+            git commit -m "obfuscate _worker.js and backup"
+          fi
+
+      - name: push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
