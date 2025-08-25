@@ -1672,7 +1672,7 @@ async function 生成配置信息(userID, hostName, sub, UA, RproxyIP, _url, fak
             }
             </script>
             ---------------------------------------------------------------<br>
-			Welcome Back user57752 :)
+			Welcome Back user57752 :)<br>
             ################################################################<br>
             ${FileName} Config<br>
             ---------------------------------------------------------------<br>
@@ -4565,4 +4565,5 @@ async function nginx() {
 	`
     return text;
 }
+
 
