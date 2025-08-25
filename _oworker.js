@@ -65,7 +65,7 @@ export default {
             } else 动态UUID = userID;
 
             if (!userID) {
-                return new Response('请设置你的UUID变量，或尝试重试部署，检查变量是否生效？', {
+                return new Response('UUID value missing, try to re-deploy. Script Status: Successfully Deployed.', {
                     status: 404,
                     headers: {
                         "Content-Type": "text/plain;charset=utf-8",
@@ -214,7 +214,7 @@ export default {
                 } else {
                     if (env.URL302) return Response.redirect(env.URL302, 302);
                     else if (env.URL) return await 代理URL(env.URL, url);
-                    else return new Response('不用怀疑！你UUID就是错的！！！', { status: 404 });
+                    else return new Response('UUID INCORRECT', { status: 404 });
                 }
             } else {
                 socks5Address = url.searchParams.get('socks5') || socks5Address;
@@ -1672,6 +1672,7 @@ async function 生成配置信息(userID, hostName, sub, UA, RproxyIP, _url, fak
             }
             </script>
             ---------------------------------------------------------------<br>
+			Welcome Back user57752 :)
             ################################################################<br>
             ${FileName} Config<br>
             ---------------------------------------------------------------<br>
@@ -1695,7 +1696,7 @@ async function 生成配置信息(userID, hostName, sub, UA, RproxyIP, _url, fak
             ---------------------------------------------------------------<br>
             ################################################################<br>
             `;
-        return `<div style="font-size:13px;">${Node Configuration Page}</div>`;
+        return `<div style="font-size:13px;">${节点配置页}</div>`;
     } else {
         if (typeof fetch != 'function') {
             return 'Error: fetch is not available in this environment.';
@@ -2212,7 +2213,7 @@ async function KV(request, env, txt = 'ADD.txt') {
                 <style>
                     body {
                         margin: 0;
-                        padding: 15px; /* 调整padding */
+                        padding: ; /* 调整padding */
                         box-sizing: border-box;
                         font-size: 13px; /* 设置全局字体大小 */
                     }
@@ -2224,7 +2225,7 @@ async function KV(request, env, txt = 'ADD.txt') {
                     .editor {
                         width: 100%;
                         height: 520px; /* 调整高度 */
-                        margin: 15px 0; /* 调整margin */
+                        margin:  0; /* 调整margin */
                         padding: 10px; /* 调整padding */
                         box-sizing: border-box;
                         border: 1px solid #ccc;
@@ -2241,7 +2242,7 @@ async function KV(request, env, txt = 'ADD.txt') {
                         gap: 10px; /* 调整gap */
                     }
                     .save-btn, .back-btn {
-                        padding: 6px 15px; /* 调整padding */
+                        padding: 6px ; /* 调整padding */
                         color: white;
                         border: none;
                         border-radius: 4px;
@@ -2261,7 +2262,7 @@ async function KV(request, env, txt = 'ADD.txt') {
                     }
                     .bestip-btn {
                         background: #2196F3;
-                        padding: 6px 15px;
+                        padding: 6px ;
                         color: white;
                         border: none;
                         border-radius: 4px;
@@ -3109,12 +3110,12 @@ async function bestIP(request, env, txt = 'ADD.txt') {
         }
         .stats {
             background-color: #e3f2fd;
-            padding: 15px;
+            padding: ;
             border-radius: 5px;
             margin: 20px 0;
         }
         .test-info {
-            margin-top: 15px;
+            margin-top: ;
             padding: 12px;
             background-color: #f3e5f5;
             border: 1px solid #ce93d8;
@@ -3135,8 +3136,8 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             background-color: #ffebee;
             border: 2px solid #f44336;
             border-radius: 8px;
-            padding: 15px;
-            margin: 15px 0;
+            padding: ;
+            margin:  0;
             color: #c62828;
         }
         .warning-notice h3 {
@@ -3157,7 +3158,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
         }
         .test-controls {
             margin: 20px 0;
-            padding: 15px;
+            padding: ;
             background-color: #f9f9f9;
             border-radius: 5px;
         }
@@ -3178,12 +3179,12 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            margin-top: 15px;
+            margin-top: ;
         }
         .test-button {
             background-color: #4CAF50;
             color: white;
-            padding: 15px 32px;
+            padding:  32px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -3200,7 +3201,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
         .save-button {
             background-color: #2196F3;
             color: white;
-            padding: 15px 32px;
+            padding:  32px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -3220,7 +3221,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
         .append-button {
             background-color: #FF9800;
             color: white;
-            padding: 15px 32px;
+            padding:  32px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -3240,7 +3241,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
         .edit-button {
             background-color: #9C27B0;
             color: white;
-            padding: 15px 32px;
+            padding:  32px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -3256,7 +3257,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
         .back-button {
             background-color: #607D8B;
             color: white;
-            padding: 15px 32px;
+            padding:  32px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -3341,7 +3342,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             margin-bottom: 5px;
         }
         .save-tip {
-            margin-top: 15px;
+            margin-top: ;
             padding: 12px;
             background-color: #e8f5e8;
             border: 1px solid #4CAF50;
@@ -3355,7 +3356,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
         }
         .warm-tips {
             margin: 20px 0;
-            padding: 15px;
+            padding: ;
             background-color: #fff3e0;
             border: 2px solid #ff9800;
             border-radius: 8px;
@@ -3493,7 +3494,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
     
     <h2>IP列表 <span id="result-count"></span></h2>
     <div class="ip-display-info" id="ip-display-info"></div>
-    <div id="region-filter" style="margin: 15px 0; display: none;"></div>
+    <div id="region-filter" style="margin:  0; display: none;"></div>
     <div class="ip-list" id="ip-list">
         <div class="ip-item">请选择端口和IP库，然后点击"开始延迟测试"加载IP列表</div>
     </div>
@@ -4564,3 +4565,4 @@ async function nginx() {
 	`
     return text;
 }
+
