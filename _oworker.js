@@ -65,7 +65,7 @@ export default {
             } else 动态UUID = userID;
 
             if (!userID) {
-                return new Response('UUID value missing, try to re-deploy. Script Status: Successfully Deployed.', {
+                return new Response('请设置你的UUID变量，或尝试重试部署，检查变量是否生效？', {
                     status: 404,
                     headers: {
                         "Content-Type": "text/plain;charset=utf-8",
@@ -214,7 +214,7 @@ export default {
                 } else {
                     if (env.URL302) return Response.redirect(env.URL302, 302);
                     else if (env.URL) return await 代理URL(env.URL, url);
-                    else return new Response('UUID INCORRECT', { status: 404 });
+                    else return new Response('不用怀疑！你UUID就是错的！！！', { status: 404 });
                 }
             } else {
                 socks5Address = url.searchParams.get('socks5') || socks5Address;
@@ -875,7 +875,7 @@ function stringify(arr, offset = 0) {
     // 验证生成的 UUID 是否有效
     if (!isValidUUID(uuid)) {
         // 原：throw TypeError("Stringified UUID is invalid");
-        throw TypeError(`UUID invalid ${uuid}`);
+        throw TypeError(`生成的 UUID 不符合规范 ${uuid}`);
         //uuid = userID;
     }
     return uuid;
@@ -1445,7 +1445,9 @@ function 配置信息(UUID, 域名地址) {
     return [威图瑞, 猫猫猫];
 }
 
-let subParams = ['sub', 'base64', 'b64', 'clash', 'singbox', 'sb'];/**
+let subParams = ['sub', 'base64', 'b64', 'clash', 'singbox', 'sb'];
+const cmad = decodeURIComponent(atob('dGVsZWdyYW0lMjAlRTQlQkElQTQlRTYlQjUlODElRTclQkUlQTQlMjAlRTYlOEElODAlRTYlOUMlQUYlRTUlQTQlQTclRTQlQkQlQUMlN0UlRTUlOUMlQTglRTclQkElQkYlRTUlOEYlOTElRTclODklOEMhJTNDYnIlM0UKJTNDYSUyMGhyZWYlM0QlMjdodHRwcyUzQSUyRiUyRnQubWUlMkZDTUxpdXNzc3MlMjclM0VodHRwcyUzQSUyRiUyRnQubWUlMkZDTUxpdXNzc3MlM0MlMkZhJTNFJTNDYnIlM0UKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJTNDYnIlM0UKZ2l0aHViJTIwJUU5JUExJUI5JUU3JTlCJUFFJUU1JTlDJUIwJUU1JTlEJTgwJTIwU3RhciFTdGFyIVN0YXIhISElM0NiciUzRQolM0NhJTIwaHJlZiUzRCUyN2h0dHBzJTNBJTJGJTJGZ2l0aHViLmNvbSUyRmNtbGl1JTJGZWRnZXR1bm5lbCUyNyUzRWh0dHBzJTNBJTJGJTJGZ2l0aHViLmNvbSUyRmNtbGl1JTJGZWRnZXR1bm5lbCUzQyUyRmElM0UlM0NiciUzRQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0lM0NiciUzRQolMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjMlMjM='));
+/**
  * @param {string} userID
  * @param {string | null} hostName
  * @param {string} sub
@@ -1523,12 +1525,12 @@ async function 生成配置信息(userID, hostName, sub, UA, RproxyIP, _url, fak
             if (hostName.includes("worker") || hostName.includes("notls")) {
                 const randomPorts = httpPorts.concat('80');
                 addressesnotls = addressesnotls.concat(
-                    cfips.map(cidr => generateRandomIPFromCIDR(cidr) + ':' + randomPorts[Math.floor(Math.random() * randomPorts.length)] + '#Cloudflare Random Node' + String(counter++).padStart(2, '0'))
+                    cfips.map(cidr => generateRandomIPFromCIDR(cidr) + ':' + randomPorts[Math.floor(Math.random() * randomPorts.length)] + '#CF随机节点' + String(counter++).padStart(2, '0'))
                 );
             } else {
                 const randomPorts = httpsPorts.concat('443');
                 addresses = addresses.concat(
-                    cfips.map(cidr => generateRandomIPFromCIDR(cidr) + ':' + randomPorts[Math.floor(Math.random() * randomPorts.length)] + '#Cloudflare Random Node' + String(counter++).padStart(2, '0'))
+                    cfips.map(cidr => generateRandomIPFromCIDR(cidr) + ':' + randomPorts[Math.floor(Math.random() * randomPorts.length)] + '#CF随机节点' + String(counter++).padStart(2, '0'))
                 );
             }
         }
@@ -1579,72 +1581,72 @@ async function 生成配置信息(userID, hostName, sub, UA, RproxyIP, _url, fak
 
         let 订阅器 = '<br>';
         if (sub) {
-            if (enableSocks) 订阅器 += `CFCDN(access method): ${enableHttp ? "HTTP" : "Socks5"}<br>&nbsp;&nbsp;${newSocks5s.join('<br>&nbsp;&nbsp;')}<br>${socks5List}`;
-            else if (proxyIP && proxyIP != '') 订阅器 += `CFCDN(access method): ProxyIP<br>&nbsp;&nbsp;${proxyIPs.join('<br>&nbsp;&nbsp;')}<br>`;
-            else if (RproxyIP == 'true') 订阅器 += `CFCDN(access method): auto get ProxyIP<br>`;
-            else 订阅器 += `CFCDN(access method): Built-in version(Default), you can also set proxyIP/PROXYIP. <br>`
-            订阅器 += `<br>SUB (Selected Subscription Generator): ${sub}`;
+            if (enableSocks) 订阅器 += `CFCDN（访问方式）: ${enableHttp ? "HTTP" : "Socks5"}<br>&nbsp;&nbsp;${newSocks5s.join('<br>&nbsp;&nbsp;')}<br>${socks5List}`;
+            else if (proxyIP && proxyIP != '') 订阅器 += `CFCDN（访问方式）: ProxyIP<br>&nbsp;&nbsp;${proxyIPs.join('<br>&nbsp;&nbsp;')}<br>`;
+            else if (RproxyIP == 'true') 订阅器 += `CFCDN（访问方式）: 自动获取ProxyIP<br>`;
+            else 订阅器 += `CFCDN（访问方式）: 内置兜底, 您也可以设置 proxyIP/PROXYIP 。<br>`
+            订阅器 += `<br>SUB（优选订阅生成器）: ${sub}`;
         } else {
-            if (enableSocks) 订阅器 += `CFCDN(access method): ${enableHttp ? "HTTP" : "Socks5"}<br>&nbsp;&nbsp;${newSocks5s.join('<br>&nbsp;&nbsp;')}<br>${socks5List}`;
-            else if (proxyIP && proxyIP != '') 订阅器 += `CFCDN(access method): ProxyIP<br>&nbsp;&nbsp;${proxyIPs.join('<br>&nbsp;&nbsp;')}<br>`;
-            else 订阅器 += `CFCDN(access method): Built-in version(Default), you can also set proxyIP/PROXYIP.<br>`;
+            if (enableSocks) 订阅器 += `CFCDN（访问方式）: ${enableHttp ? "HTTP" : "Socks5"}<br>&nbsp;&nbsp;${newSocks5s.join('<br>&nbsp;&nbsp;')}<br>${socks5List}`;
+            else if (proxyIP && proxyIP != '') 订阅器 += `CFCDN（访问方式）: ProxyIP<br>&nbsp;&nbsp;${proxyIPs.join('<br>&nbsp;&nbsp;')}<br>`;
+            else 订阅器 += `CFCDN（访问方式）: 内置兜底, 您也可以设置 proxyIP/PROXYIP 。<br>`;
             let 判断是否绑定KV空间 = '';
-            if (env.KV) 判断是否绑定KV空间 = ` [<a href='${_url.pathname}/edit'>Edit Selected IP list</a>]  [<a href='${_url.pathname}/bestip'>Select IP online</a>]`;
-            订阅器 += `<br>Your SUB is provided by built-in addresses/ADD* value${判断是否绑定KV空间}<br>`;
-            if (addresses.length > 0) 订阅器 += `ADD（TLS Selected Domain&IP）: <br>&nbsp;&nbsp;${addresses.join('<br>&nbsp;&nbsp;')}<br>`;
-            if (addressesnotls.length > 0) 订阅器 += `ADDNOTLS（noTLS Selected Domain&IP）: <br>&nbsp;&nbsp;${addressesnotls.join('<br>&nbsp;&nbsp;')}<br>`;
-            if (addressesapi.length > 0) 订阅器 += `ADDAPI（TLS Selected Domain&IP API）: <br>&nbsp;&nbsp;${addressesapi.join('<br>&nbsp;&nbsp;')}<br>`;
-            if (addressesnotlsapi.length > 0) 订阅器 += `ADDNOTLSAPI（noTLS Selected Domain&IP API）: <br>&nbsp;&nbsp;${addressesnotlsapi.join('<br>&nbsp;&nbsp;')}<br>`;
-            if (addressescsv.length > 0) 订阅器 += `ADDCSV（IPTest .csv file speed limit ${DLS} ）: <br>&nbsp;&nbsp;${addressescsv.join('<br>&nbsp;&nbsp;')}<br>`;
+            if (env.KV) 判断是否绑定KV空间 = ` [<a href='${_url.pathname}/edit'>编辑优选列表</a>]  [<a href='${_url.pathname}/bestip'>在线优选IP</a>]`;
+            订阅器 += `<br>您的订阅内容由 内置 addresses/ADD* 参数变量提供${判断是否绑定KV空间}<br>`;
+            if (addresses.length > 0) 订阅器 += `ADD（TLS优选域名&IP）: <br>&nbsp;&nbsp;${addresses.join('<br>&nbsp;&nbsp;')}<br>`;
+            if (addressesnotls.length > 0) 订阅器 += `ADDNOTLS（noTLS优选域名&IP）: <br>&nbsp;&nbsp;${addressesnotls.join('<br>&nbsp;&nbsp;')}<br>`;
+            if (addressesapi.length > 0) 订阅器 += `ADDAPI（TLS优选域名&IP 的 API）: <br>&nbsp;&nbsp;${addressesapi.join('<br>&nbsp;&nbsp;')}<br>`;
+            if (addressesnotlsapi.length > 0) 订阅器 += `ADDNOTLSAPI（noTLS优选域名&IP 的 API）: <br>&nbsp;&nbsp;${addressesnotlsapi.join('<br>&nbsp;&nbsp;')}<br>`;
+            if (addressescsv.length > 0) 订阅器 += `ADDCSV（IPTest测速csv文件 限速 ${DLS} ）: <br>&nbsp;&nbsp;${addressescsv.join('<br>&nbsp;&nbsp;')}<br>`;
         }
 
         if (动态UUID && _url.pathname !== `/${动态UUID}`) 订阅器 = '';
-        else 订阅器 += `<br>SUBAPI(Sub convert backend) <a href='${subProtocol}://${subConverter}/version' target="_blank" rel="noopener noreferrer">${subProtocol}://${subConverter}</a><br>SUBCONFIG(Sub convert to config): <a href='${subConfig}' target="_blank" rel="noopener noreferrer">${subConfig}</a>`;
-        const 动态UUID信息 = (uuid != userID) ? `TOKEN: ${uuid}<br>UUIDNow: ${userID}<br>UUIDLow: ${userIDLow}<br>${userIDTime}TIME(Dynamic UUID valid time): ${有效时间} Day(s)<br>UPTIME(Dynamic UUID update time): ${更新时间} O'clock(CST)<br><br>` : `${userIDTime}`;
+        else 订阅器 += `<br>SUBAPI（订阅转换后端）: <a href='${subProtocol}://${subConverter}/version' target="_blank" rel="noopener noreferrer">${subProtocol}://${subConverter}</a><br>SUBCONFIG（订阅转换配置文件）: <a href='${subConfig}' target="_blank" rel="noopener noreferrer">${subConfig}</a>`;
+        const 动态UUID信息 = (uuid != userID) ? `TOKEN: ${uuid}<br>UUIDNow: ${userID}<br>UUIDLow: ${userIDLow}<br>${userIDTime}TIME（动态UUID有效时间）: ${有效时间} 天<br>UPTIME（动态UUID更新时间）: ${更新时间} 时（北京时间）<br><br>` : `${userIDTime}`;
         const 节点配置页 = `
             ################################################################<br>
-            Subscribe / sub  Subscription, click the link to <strong>copy subscription</strong> and <strong>Generate QR code</strong> autoIf you are usinglly <br>
+            Subscribe / sub 订阅地址, 点击链接自动 <strong>复制订阅链接</strong> 并 <strong>生成订阅二维码</strong> <br>
             ---------------------------------------------------------------<br>
-            Auto Subscription:<br>
+            自适应订阅地址:<br>
             <a href="javascript:void(0)" onclick="copyToClipboard('https://${proxyhost}${hostName}/${uuid}?sub','qrcode_0')" style="color:blue;text-decoration:underline;cursor:pointer;">https://${proxyhost}${hostName}/${uuid}</a><br>
             <div id="qrcode_0" style="margin: 10px 10px 10px 10px;"></div>
-            Base64 Subscription:<br>
+            Base64订阅地址:<br>
             <a href="javascript:void(0)" onclick="copyToClipboard('https://${proxyhost}${hostName}/${uuid}?b64','qrcode_1')" style="color:blue;text-decoration:underline;cursor:pointer;">https://${proxyhost}${hostName}/${uuid}?b64</a><br>
             <div id="qrcode_1" style="margin: 10px 10px 10px 10px;"></div>
-            clash Subscription:<br>
+            clash订阅地址:<br>
             <a href="javascript:void(0)" onclick="copyToClipboard('https://${proxyhost}${hostName}/${uuid}?clash','qrcode_2')" style="color:blue;text-decoration:underline;cursor:pointer;">https://${proxyhost}${hostName}/${uuid}?clash</a><br>
             <div id="qrcode_2" style="margin: 10px 10px 10px 10px;"></div>
-            singbox Subscription:<br>
+            singbox订阅地址:<br>
             <a href="javascript:void(0)" onclick="copyToClipboard('https://${proxyhost}${hostName}/${uuid}?sb','qrcode_3')" style="color:blue;text-decoration:underline;cursor:pointer;">https://${proxyhost}${hostName}/${uuid}?sb</a><br>
             <div id="qrcode_3" style="margin: 10px 10px 10px 10px;"></div>
-            loon Subscription:<br>
+            loon订阅地址:<br>
             <a href="javascript:void(0)" onclick="copyToClipboard('https://${proxyhost}${hostName}/${uuid}?loon','qrcode_5')" style="color:blue;text-decoration:underline;cursor:pointer;">https://${proxyhost}${hostName}/${uuid}?loon</a><br>
             <div id="qrcode_5" style="margin: 10px 10px 10px 10px;"></div>
-            <strong><a href="javascript:void(0);" id="noticeToggle" onclick="toggleNotice()">Useful Subscribe Skills</a></strong><br>
+            <strong><a href="javascript:void(0);" id="noticeToggle" onclick="toggleNotice()">实用订阅技巧∨</a></strong><br>
                 <div id="noticeContent" class="notice-content" style="display: none;">
-                    <strong>1.</strong> If you are using PassWall、PassWall2 routing plugin, then set <strong>User-Agent</strong> to <strong>PassWall</strong>；<br>
+                    <strong>1.</strong> 如您使用的是 PassWall、PassWall2 路由插件，订阅编辑的 <strong>用户代理(User-Agent)</strong> 设置为 <strong>PassWall</strong> 即可；<br>
                     <br>
-                    <strong>2.</strong> If you are using SSR+ plugin, <strong>Base64 Subscription</strong> is recommenIf you want to switch；<br>
+                    <strong>2.</strong> 如您使用的是 SSR+ 路由插件，推荐使用 <strong>Base64订阅地址</strong> 进行订阅；<br>
                     <br>
-                    <strong>3.</strong> If you want to switch <a href='${atob('aHR0cHM6Ly9naXRodWIuY29tL2NtbGl1L1dvcmtlclZsZXNzMnN1Yg==')}'>Selected Subscription Generator</a> to: sub.google.com, you can add "?sub=sub.google.com" to the end of the link, like this：<br>
+                    <strong>3.</strong> 快速切换 <a href='${atob('aHR0cHM6Ly9naXRodWIuY29tL2NtbGl1L1dvcmtlclZsZXNzMnN1Yg==')}'>优选订阅生成器</a> 至：sub.google.com，您可将"?sub=sub.google.com"参数添加到链接末尾，例如：<br>
                     &nbsp;&nbsp;https://${proxyhost}${hostName}/${uuid}<strong>?sub=sub.google.com</strong><br>
                     <br>
-                    <strong>4.</strong> If you want to switch PROXYIP to：proxyip.cmliussss.net:443 rapidly, you can add "?proxyip=proxyip.cmliussss.net:443" to the end of the link, like this：<br>
+                    <strong>4.</strong> 快速更换 PROXYIP 至：proxyip.cmliussss.net:443，您可将"?proxyip=proxyip.cmliussss.net:443"参数添加到链接末尾，例如：<br>
                     &nbsp;&nbsp; https://${proxyhost}${hostName}/${uuid}<strong>?proxyip=proxyip.cmliussss.net:443</strong><br>
                     <br>
-                    <strong>5.</strong> If you want to switch SOCKS5 to：user:password@127.0.0.1:1080 rapidly, you can add "?socks5=user:password@127.0.0.1:1080" to the end of the link, like this：<br>
+                    <strong>5.</strong> 快速更换 SOCKS5 至：user:password@127.0.0.1:1080，您可将"?socks5=user:password@127.0.0.1:1080"参数添加到链接末尾，例如：<br>
                     &nbsp;&nbsp;https://${proxyhost}${hostName}/${uuid}<strong>?socks5=user:password@127.0.0.1:1080</strong><br>
                     <br>
-                    <strong>6.</strong> If you need to set multi parameters you should use '&' to seperate them, like this:<br>
+                    <strong>6.</strong> 如需指定多个参数则需要使用'&'做间隔，例如：<br>
                     &nbsp;&nbsp;https://${proxyhost}${hostName}/${uuid}?sub=sub.google.com<strong>&</strong>proxyip=proxyip.cmliussss.net<br>
                 </div>
             <script src="https://cdn.jsdelivr.net/npm/@keeex/qrcodejs-kx@1.0.2/qrcode.min.js"></script>
             <script>
             function copyToClipboard(text, qrcode) {
                 navigator.clipboard.writeText(text).then(() => {
-                    alert('Copied!');
+                    alert('已复制到剪贴板');
                 }).catch(err => {
-                    console.error('Copy failed:', err);
+                    console.error('复制失败:', err);
                 });
                 const qrcodeDiv = document.getElementById(qrcode);
                 qrcodeDiv.innerHTML = '';
@@ -1664,23 +1666,22 @@ async function 生成配置信息(userID, hostName, sub, UA, RproxyIP, _url, fak
                 const noticeToggle = document.getElementById('noticeToggle');
                 if (noticeContent.style.display === 'none') {
                     noticeContent.style.display = 'block';
-                    noticeToggle.textContent = 'Useful Subscribe Skills∧';
+                    noticeToggle.textContent = '实用订阅技巧∧';
                 } else {
                     noticeContent.style.display = 'none'; 
-                    noticeToggle.textContent = 'Useful Subscribe Skills∨';
+                    noticeToggle.textContent = '实用订阅技巧∨';
                 }
             }
             </script>
             ---------------------------------------------------------------<br>
-			Welcome Back user57752 :)<br>
             ################################################################<br>
-            ${FileName} Config<br>
+            ${FileName} 配置信息<br>
             ---------------------------------------------------------------<br>
             ${动态UUID信息}HOST: ${hostName}<br>
             UUID: ${userID}<br>
             FKID: ${fakeUserID}<br>
             UA: ${UA}<br>
-            SCV(skip TLS verification): ${SCV}<br>
+            SCV（跳过TLS证书验证）: ${SCV}<br>
             ${订阅器}<br>
             ---------------------------------------------------------------<br>
             ################################################################<br>
@@ -1695,6 +1696,7 @@ async function 生成配置信息(userID, hostName, sub, UA, RproxyIP, _url, fak
             ${clash}<br>
             ---------------------------------------------------------------<br>
             ################################################################<br>
+            ${cmad}
             `;
         return `<div style="font-size:13px;">${节点配置页}</div>`;
     } else {
@@ -1734,7 +1736,7 @@ async function 生成配置信息(userID, hostName, sub, UA, RproxyIP, _url, fak
                         const response = await fetch(proxyhostsURL);
 
                         if (!response.ok) {
-                            console.error('Error during fetching addresses:', response.status, response.statusText);
+                            console.error('获取地址时出错:', response.status, response.statusText);
                             return; // 如果有错误，直接返回
                         }
 
@@ -1745,7 +1747,7 @@ async function 生成配置信息(userID, hostName, sub, UA, RproxyIP, _url, fak
 
                         proxyhosts = proxyhosts.concat(nonEmptyLines);
                     } catch (error) {
-                        console.error('Error during fetching addresses:', error);
+                        console.error('获取地址时出错:', error);
                     }
                 }
                 // 使用Set对象去重
@@ -1759,7 +1761,7 @@ async function 生成配置信息(userID, hostName, sub, UA, RproxyIP, _url, fak
                 if (_url.search) url += '&notls';
                 else url += '?notls';
             }
-            console.log(`Fake Sub: ${url}`);
+            console.log(`虚假订阅: ${url}`);
         }
 
         if (!userAgent.includes(('CF-Workers-SUB').toLowerCase()) && !_url.searchParams.has('b64') && !_url.searchParams.has('base64')) {
@@ -1895,7 +1897,7 @@ async function 整理测速结果(tls) {
             const response = await fetch(csvUrl);
 
             if (!response.ok) {
-                console.error('Error during Fetching CSV:', response.status, response.statusText);
+                console.error('获取CSV地址时出错:', response.status, response.statusText);
                 continue;
             }
 
@@ -1916,7 +1918,7 @@ async function 整理测速结果(tls) {
             const dataCenterIndex = tlsIndex + remarkIndex; // 数据中心是 TLS 的后一个字段
 
             if (tlsIndex === -1) {
-                console.error('CSV content(s) missing');
+                console.error('CSV文件缺少必需的字段');
                 continue;
             }
 
@@ -1939,7 +1941,7 @@ async function 整理测速结果(tls) {
                 }
             }
         } catch (error) {
-            console.error('Error during Fetching CSV:', error);
+            console.error('获取CSV地址时出错:', error);
             continue;
         }
     }
@@ -2198,8 +2200,8 @@ async function KV(request, env, txt = 'ADD.txt') {
             try {
                 content = await env.KV.get(txt) || '';
             } catch (error) {
-                console.error('Error during reading KV:', error);
-                content = 'Error during reading datas:' + error.message;
+                console.error('读取KV时发生错误:', error);
+                content = '读取数据时发生错误: ' + error.message;
             }
         }
 
@@ -2207,13 +2209,13 @@ async function KV(request, env, txt = 'ADD.txt') {
             <!DOCTYPE html>
             <html>
             <head>
-                <title>Selected Subs</title>
+                <title>优选订阅列表</title>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
                 <style>
                     body {
                         margin: 0;
-                        padding: ; /* 调整padding */
+                        padding: 15px; /* 调整padding */
                         box-sizing: border-box;
                         font-size: 13px; /* 设置全局字体大小 */
                     }
@@ -2225,7 +2227,7 @@ async function KV(request, env, txt = 'ADD.txt') {
                     .editor {
                         width: 100%;
                         height: 520px; /* 调整高度 */
-                        margin:  0; /* 调整margin */
+                        margin: 15px 0; /* 调整margin */
                         padding: 10px; /* 调整padding */
                         box-sizing: border-box;
                         border: 1px solid #ccc;
@@ -2242,7 +2244,7 @@ async function KV(request, env, txt = 'ADD.txt') {
                         gap: 10px; /* 调整gap */
                     }
                     .save-btn, .back-btn {
-                        padding: 6px ; /* 调整padding */
+                        padding: 6px 15px; /* 调整padding */
                         color: white;
                         border: none;
                         border-radius: 4px;
@@ -2262,7 +2264,7 @@ async function KV(request, env, txt = 'ADD.txt') {
                     }
                     .bestip-btn {
                         background: #2196F3;
-                        padding: 6px ;
+                        padding: 6px 15px;
                         color: white;
                         border: none;
                         border-radius: 4px;
@@ -2284,9 +2286,9 @@ async function KV(request, env, txt = 'ADD.txt') {
             </head>
             <body>
                 ################################################################<br>
-                ${FileName} Selected Subs:<br>
+                ${FileName} 优选订阅列表:<br>
                 ---------------------------------------------------------------<br>
-                &nbsp;&nbsp;<strong><a href="javascript:void(0);" id="noticeToggle" onclick="toggleNotice()">Notice∨</a></strong><br>
+                &nbsp;&nbsp;<strong><a href="javascript:void(0);" id="noticeToggle" onclick="toggleNotice()">注意事项∨</a></strong><br>
                 <div id="noticeContent" class="notice-content">
                     ${decodeURIComponent(atob('JTA5JTA5JTA5JTA5JTA5JTNDc3Ryb25nJTNFMS4lM0MlMkZzdHJvbmclM0UlMjBBRERBUEklMjAlRTUlQTYlODIlRTYlOUUlOUMlRTYlOTglQUYlRTUlOEYlOEQlRTQlQkIlQTNJUCVFRiVCQyU4QyVFNSU4RiVBRiVFNCVCRCU5QyVFNCVCOCVCQVBST1hZSVAlRTclOUElODQlRTglQUYlOUQlRUYlQkMlOEMlRTUlOEYlQUYlRTUlQjAlODYlMjIlM0Zwcm94eWlwJTNEdHJ1ZSUyMiVFNSU4RiU4MiVFNiU5NSVCMCVFNiVCNyVCQiVFNSU4QSVBMCVFNSU4OCVCMCVFOSU5MyVCRSVFNiU4RSVBNSVFNiU5QyVBQiVFNSVCMCVCRSVFRiVCQyU4QyVFNCVCRSU4QiVFNSVBNiU4MiVFRiVCQyU5QSUzQ2JyJTNFCiUwOSUwOSUwOSUwOSUwOSUyNm5ic3AlM0IlMjZuYnNwJTNCaHR0cHMlM0ElMkYlMkZyYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tJTJGY21saXUlMkZXb3JrZXJWbGVzczJzdWIlMkZtYWluJTJGYWRkcmVzc2VzYXBpLnR4dCUzQ3N0cm9uZyUzRSUzRnByb3h5aXAlM0R0cnVlJTNDJTJGc3Ryb25nJTNFJTNDYnIlM0UlM0NiciUzRQolMDklMDklMDklMDklMDklM0NzdHJvbmclM0UyLiUzQyUyRnN0cm9uZyUzRSUyMEFEREFQSSUyMCVFNSVBNiU4MiVFNiU5RSU5QyVFNiU5OCVBRiUyMCUzQ2ElMjBocmVmJTNEJTI3aHR0cHMlM0ElMkYlMkZnaXRodWIuY29tJTJGWElVMiUyRkNsb3VkZmxhcmVTcGVlZFRlc3QlMjclM0VDbG91ZGZsYXJlU3BlZWRUZXN0JTNDJTJGYSUzRSUyMCVFNyU5QSU4NCUyMGNzdiUyMCVFNyVCQiU5MyVFNiU5RSU5QyVFNiU5NiU4NyVFNCVCQiVCNiVFRiVCQyU4QyVFNCVCRSU4QiVFNSVBNiU4MiVFRiVCQyU5QSUzQ2JyJTNFCiUwOSUwOSUwOSUwOSUwOSUyNm5ic3AlM0IlMjZuYnNwJTNCaHR0cHMlM0ElMkYlMkZyYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tJTJGY21saXUlMkZXb3JrZXJWbGVzczJzdWIlMkZtYWluJTJGQ2xvdWRmbGFyZVNwZWVkVGVzdC5jc3YlM0NiciUzRSUzQ2JyJTNFCiUwOSUwOSUwOSUwOSUwOSUyNm5ic3AlM0IlMjZuYnNwJTNCLSUyMCVFNSVBNiU4MiVFOSU5QyU4MCVFNiU4QyU4NyVFNSVBRSU5QTIwNTMlRTclQUIlQUYlRTUlOEYlQTMlRTUlOEYlQUYlRTUlQjAlODYlMjIlM0Zwb3J0JTNEMjA1MyUyMiVFNSU4RiU4MiVFNiU5NSVCMCVFNiVCNyVCQiVFNSU4QSVBMCVFNSU4OCVCMCVFOSU5MyVCRSVFNiU4RSVBNSVFNiU5QyVBQiVFNSVCMCVCRSVFRiVCQyU4QyVFNCVCRSU4QiVFNSVBNiU4MiVFRiVCQyU5QSUzQ2JyJTNFCiUwOSUwOSUwOSUwOSUwOSUyNm5ic3AlM0IlMjZuYnNwJTNCaHR0cHMlM0ElMkYlMkZyYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tJTJGY21saXUlMkZXb3JrZXJWbGVzczJzdWIlMkZtYWluJTJGQ2xvdWRmbGFyZVNwZWVkVGVzdC5jc3YlM0NzdHJvbmclM0UlM0Zwb3J0JTNEMjA1MyUzQyUyRnN0cm9uZyUzRSUzQ2JyJTNFJTNDYnIlM0UKJTA5JTA5JTA5JTA5JTA5JTI2bmJzcCUzQiUyNm5ic3AlM0ItJTIwJUU1JUE2JTgyJUU5JTlDJTgwJUU2JThDJTg3JUU1JUFFJTlBJUU4JThBJTgyJUU3JTgyJUI5JUU1JUE0JTg3JUU2JUIzJUE4JUU1JThGJUFGJUU1JUIwJTg2JTIyJTNGaWQlM0RDRiVFNCVCQyU5OCVFOSU4MCU4OSUyMiVFNSU4RiU4MiVFNiU5NSVCMCVFNiVCNyVCQiVFNSU4QSVBMCVFNSU4OCVCMCVFOSU5MyVCRSVFNiU4RSVBNSVFNiU5QyVBQiVFNSVCMCVCRSVFRiVCQyU4QyVFNCVCRSU4QiVFNSVBNiU4MiVFRiVCQyU5QSUzQ2JyJTNFCiUwOSUwOSUwOSUwOSUwOSUyNm5ic3AlM0IlMjZuYnNwJTNCaHR0cHMlM0ElMkYlMkZyYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tJTJGY21saXUlMkZXb3JrZXJWbGVzczJzdWIlMkZtYWluJTJGQ2xvdWRmbGFyZVNwZWVkVGVzdC5jc3YlM0NzdHJvbmclM0UlM0ZpZCUzRENGJUU0JUJDJTk4JUU5JTgwJTg5JTNDJTJGc3Ryb25nJTNFJTNDYnIlM0UlM0NiciUzRQolMDklMDklMDklMDklMDklMjZuYnNwJTNCJTI2bmJzcCUzQi0lMjAlRTUlQTYlODIlRTklOUMlODAlRTYlOEMlODclRTUlQUUlOUElRTUlQTQlOUElRTQlQjglQUElRTUlOEYlODIlRTYlOTUlQjAlRTUlODglOTklRTklOUMlODAlRTglQTYlODElRTQlQkQlQkYlRTclOTQlQTglMjclMjYlMjclRTUlODElOUElRTklOTclQjQlRTklOUElOTQlRUYlQkMlOEMlRTQlQkUlOEIlRTUlQTYlODIlRUYlQkMlOUElM0NiciUzRQolMDklMDklMDklMDklMDklMjZuYnNwJTNCJTI2bmJzcCUzQmh0dHBzJTNBJTJGJTJGcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSUyRmNtbGl1JTJGV29ya2VyVmxlc3Myc3ViJTJGbWFpbiUyRkNsb3VkZmxhcmVTcGVlZFRlc3QuY3N2JTNGaWQlM0RDRiVFNCVCQyU5OCVFOSU4MCU4OSUzQ3N0cm9uZyUzRSUyNiUzQyUyRnN0cm9uZyUzRXBvcnQlM0QyMDUzJTNDYnIlM0U='))}
                 </div>
@@ -2296,14 +2298,15 @@ async function KV(request, env, txt = 'ADD.txt') {
                         placeholder="${decodeURIComponent(atob('QUREJUU3JUE0JUJBJUU0JUJFJThCJUVGJUJDJTlBCnZpc2EuY24lMjMlRTQlQkMlOTglRTklODAlODklRTUlOUYlOUYlRTUlOTAlOEQKMTI3LjAuMC4xJTNBMTIzNCUyM0NGbmF0CiU1QjI2MDYlM0E0NzAwJTNBJTNBJTVEJTNBMjA1MyUyM0lQdjYKCiVFNiVCMyVBOCVFNiU4NCU4RiVFRiVCQyU5QQolRTYlQUYlOEYlRTglQTElOEMlRTQlQjglODAlRTQlQjglQUElRTUlOUMlQjAlRTUlOUQlODAlRUYlQkMlOEMlRTYlQTAlQkMlRTUlQkMlOEYlRTQlQjglQkElMjAlRTUlOUMlQjAlRTUlOUQlODAlM0ElRTclQUIlQUYlRTUlOEYlQTMlMjMlRTUlQTQlODclRTYlQjMlQTgKSVB2NiVFNSU5QyVCMCVFNSU5RCU4MCVFOSU5QyU4MCVFOCVBNiU4MSVFNyU5NCVBOCVFNCVCOCVBRCVFNiU4QiVBQyVFNSU4RiVCNyVFNiU4QiVBQyVFOCVCNSVCNyVFNiU5RCVBNSVFRiVCQyU4QyVFNSVBNiU4MiVFRiVCQyU5QSU1QjI2MDYlM0E0NzAwJTNBJTNBJTVEJTNBMjA1MwolRTclQUIlQUYlRTUlOEYlQTMlRTQlQjglOEQlRTUlODYlOTklRUYlQkMlOEMlRTklQkIlOTglRTglQUUlQTQlRTQlQjglQkElMjA0NDMlMjAlRTclQUIlQUYlRTUlOEYlQTMlRUYlQkMlOEMlRTUlQTYlODIlRUYlQkMlOUF2aXNhLmNuJTIzJUU0JUJDJTk4JUU5JTgwJTg5JUU1JTlGJTlGJUU1JTkwJThECgoKQUREQVBJJUU3JUE0JUJBJUU0JUJFJThCJUVGJUJDJTlBCmh0dHBzJTNBJTJGJTJGcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSUyRmNtbGl1JTJGV29ya2VyVmxlc3Myc3ViJTJGcmVmcyUyRmhlYWRzJTJGbWFpbiUyRmFkZHJlc3Nlc2FwaS50eHQKCiVFNiVCMyVBOCVFNiU4NCU4RiVFRiVCQyU5QUFEREFQSSVFNyU5QiVCNCVFNiU4RSVBNSVFNiVCNyVCQiVFNSU4QSVBMCVFNyU5QiVCNCVFOSU5MyVCRSVFNSU4RCVCMyVFNSU4RiVBRg=='))}"
                         id="content">${content}</textarea>
                     <div class="save-container">
-                        <button class="back-btn" onclick="goBack()">Return</button>
-                        <button class="bestip-btn" onclick="goBestIP()">Select IP online</button>
-                        <button class="save-btn" onclick="saveContent(this)">Save</button>
+                        <button class="back-btn" onclick="goBack()">返回配置页</button>
+                        <button class="bestip-btn" onclick="goBestIP()">在线优选IP</button>
+                        <button class="save-btn" onclick="saveContent(this)">保存</button>
                         <span class="save-status" id="saveStatus"></span>
                     </div>
                     <br>
                     ################################################################<br>
-                    ` : '<p>KV namespace not detected</p>'}
+                    ${cmad}
+                    ` : '<p>未绑定KV空间</p>'}
                 </div>
         
                 <script>
@@ -2332,7 +2335,7 @@ async function KV(request, env, txt = 'ADD.txt') {
                     function saveContent(button) {
                         try {
                             const updateButtonText = (step) => {
-                                button.textContent = \`Saving: \${step}\`;
+                                button.textContent = \`保存中: \${step}\`;
                             };
                             // 检测是否为iOS设备
                             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -2341,22 +2344,22 @@ async function KV(request, env, txt = 'ADD.txt') {
                             if (!isIOS) {
                                 replaceFullwidthColon();
                             }
-                            updateButtonText('Start saving...');
+                            updateButtonText('开始保存');
                             button.disabled = true;
                             // 获取textarea内容和原始内容
                             const textarea = document.getElementById('content');
                             if (!textarea) {
-                                throw new Error('cannot find text editing space');
+                                throw new Error('找不到文本编辑区域');
                             }
-                            updateButtonText('Getting contents...');
+                            updateButtonText('获取内容');
                             let newContent;
                             let originalContent;
                             try {
                                 newContent = textarea.value || '';
                                 originalContent = textarea.defaultValue || '';
                             } catch (e) {
-                                console.error('Error during getting contents:', e);
-                                throw new Error('cannot find text editing space');
+                                console.error('获取内容错误:', e);
+                                throw new Error('无法获取编辑内容');
                             }
                             updateButtonText('准备状态更新函数');
                             const updateStatus = (message, isError = false) => {
@@ -2372,7 +2375,7 @@ async function KV(request, env, txt = 'ADD.txt') {
                                 button.disabled = false;
                             };
                             if (newContent !== originalContent) {
-                                updateButtonText('Sending saving request...');
+                                updateButtonText('发送保存请求');
                                 fetch(window.location.href, {
                                     method: 'POST',
                                     body: newContent,
@@ -2382,35 +2385,35 @@ async function KV(request, env, txt = 'ADD.txt') {
                                     cache: 'no-cache'
                                 })
                                 .then(response => {
-                                    updateButtonText('Check response status');
+                                    updateButtonText('检查响应状态');
                                     if (!response.ok) {
                                         throw new Error(\`HTTP error! status: \${response.status}\`);
                                     }
-                                    updateButtonText('Update saving status');
+                                    updateButtonText('更新保存状态');
                                     const now = new Date().toLocaleString();
-                                    document.title = \`Edit Saved \${now}\`;
-                                    updateStatus(\`Saved \${now}\`);
+                                    document.title = \`编辑已保存 \${now}\`;
+                                    updateStatus(\`已保存 \${now}\`);
                                 })
                                 .catch(error => {
-                                    updateButtonText('ERROR');
+                                    updateButtonText('处理错误');
                                     console.error('Save error:', error);
-                                    updateStatus(\`Error during saving: \${error.message}\`, true);
+                                    updateStatus(\`保存失败: \${error.message}\`, true);
                                 })
                                 .finally(() => {
                                     resetButton();
                                 });
                             } else {
-                                updateButtonText('Check changes');
-                                updateStatus('No changes');
+                                updateButtonText('检查内容变化');
+                                updateStatus('内容未变化');
                                 resetButton();
                             }
                         } catch (error) {
-                            console.error('Error during saving: ', error);
-                            button.textContent = 'Save';
+                            console.error('保存过程出错:', error);
+                            button.textContent = '保存';
                             button.disabled = false;
                             const statusElem = document.getElementById('saveStatus');
                             if (statusElem) {
-                                statusElem.textContent = \`ERROR: \${error.message}\`;
+                                statusElem.textContent = \`错误: \${error.message}\`;
                                 statusElem.style.color = 'red';
                             }
                         }
@@ -2428,10 +2431,10 @@ async function KV(request, env, txt = 'ADD.txt') {
                     const noticeToggle = document.getElementById('noticeToggle');
                     if (noticeContent.style.display === 'none' || noticeContent.style.display === '') {
                         noticeContent.style.display = 'block';
-                        noticeToggle.textContent = 'Notice∧';
+                        noticeToggle.textContent = '注意事项∧';
                     } else {
                         noticeContent.style.display = 'none';
-                        noticeToggle.textContent = 'Notice∨';
+                        noticeToggle.textContent = '注意事项∨';
                     }
                 }
         
@@ -3110,12 +3113,12 @@ async function bestIP(request, env, txt = 'ADD.txt') {
         }
         .stats {
             background-color: #e3f2fd;
-            padding: ;
+            padding: 15px;
             border-radius: 5px;
             margin: 20px 0;
         }
         .test-info {
-            margin-top: ;
+            margin-top: 15px;
             padding: 12px;
             background-color: #f3e5f5;
             border: 1px solid #ce93d8;
@@ -3136,8 +3139,8 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             background-color: #ffebee;
             border: 2px solid #f44336;
             border-radius: 8px;
-            padding: ;
-            margin:  0;
+            padding: 15px;
+            margin: 15px 0;
             color: #c62828;
         }
         .warning-notice h3 {
@@ -3158,7 +3161,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
         }
         .test-controls {
             margin: 20px 0;
-            padding: ;
+            padding: 15px;
             background-color: #f9f9f9;
             border-radius: 5px;
         }
@@ -3179,12 +3182,12 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            margin-top: ;
+            margin-top: 15px;
         }
         .test-button {
             background-color: #4CAF50;
             color: white;
-            padding:  32px;
+            padding: 15px 32px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -3201,7 +3204,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
         .save-button {
             background-color: #2196F3;
             color: white;
-            padding:  32px;
+            padding: 15px 32px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -3221,7 +3224,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
         .append-button {
             background-color: #FF9800;
             color: white;
-            padding:  32px;
+            padding: 15px 32px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -3241,7 +3244,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
         .edit-button {
             background-color: #9C27B0;
             color: white;
-            padding:  32px;
+            padding: 15px 32px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -3257,7 +3260,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
         .back-button {
             background-color: #607D8B;
             color: white;
-            padding:  32px;
+            padding: 15px 32px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -3342,7 +3345,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             margin-bottom: 5px;
         }
         .save-tip {
-            margin-top: ;
+            margin-top: 15px;
             padding: 12px;
             background-color: #e8f5e8;
             border: 1px solid #4CAF50;
@@ -3356,7 +3359,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
         }
         .warm-tips {
             margin: 20px 0;
-            padding: ;
+            padding: 15px;
             background-color: #fff3e0;
             border: 2px solid #ff9800;
             border-radius: 8px;
@@ -3494,7 +3497,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
     
     <h2>IP列表 <span id="result-count"></span></h2>
     <div class="ip-display-info" id="ip-display-info"></div>
-    <div id="region-filter" style="margin:  0; display: none;"></div>
+    <div id="region-filter" style="margin: 15px 0; display: none;"></div>
     <div class="ip-list" id="ip-list">
         <div class="ip-item">请选择端口和IP库，然后点击"开始延迟测试"加载IP列表</div>
     </div>
@@ -4565,5 +4568,3 @@ async function nginx() {
 	`
     return text;
 }
-
-
