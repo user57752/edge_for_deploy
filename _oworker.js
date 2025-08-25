@@ -3089,7 +3089,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
     <!DOCTYPE html>
     <html>
     <head>
-    <title>Cloudflare IP Selector</title>
+    <title>Cloudflare IP优选</title>
     <style>
         body {
             width: 80%;
@@ -3412,61 +3412,61 @@ async function bestIP(request, env, txt = 'ADD.txt') {
     </style>
     </head>
     <body>
-    <h1>Online IP Selection</h1>
+    <h1>在线优选IP</h1>
     
     ${!isChina ? `
     <div class="warning-notice">
-        <h3>🚨 Warning: Proxy Detected</h3>
-        <p><strong>We have detected you are currently using proxy.</strong></p>
-        <p>In proxied environment may cause follow issues:</p>
+        <h3>🚨 代理检测警告</h3>
+        <p><strong>检测到您当前很可能处于代理/VPN环境中！</strong></p>
+        <p>在代理状态下进行的IP优选测试结果将不准确，可能导致：</p>
         <ul>
-            <li>Delay data unexact, cannot test your real network environment.</li>
-            <li>Selected IP performance may not as good as expected.</li>
-            <li>Limited reference value.</li>
+            <li>延迟数据失真，无法反映真实网络状况</li>
+            <li>优选出的IP在直连环境下表现不佳</li>
+            <li>测试结果对实际使用场景参考价值有限</li>
         </ul>
-        <p><strong>Solution: </strong>Turn ALL Proxy tool(VPN, Tor,etc.) OFF and make sure you are visiting this site directly.</p>
+        <p><strong>建议操作：</strong>请关闭所有代理软件（VPN、科学上网工具等），确保处于直连网络环境后重新访问本页面。</p>
     </div>
     ` : ''}
 
     <div class="stats">
-        <h2>Statistics</h2>
-        <p><strong>Your country:</strong><span class="${countryDisplayClass}">${countryDisplayText}</span></p>
-        <p><strong>IP: </strong><span id="ip-count">Click to test&load</span></p>
-        <p><strong>Test progress: </strong><span id="progress-text">Idle</span></p>
+        <h2>统计信息</h2>
+        <p><strong>您的国家：</strong><span class="${countryDisplayClass}">${countryDisplayText}</span></p>
+        <p><strong>获取到的IP总数：</strong><span id="ip-count">点击开始测试后加载</span></p>
+        <p><strong>测试进度：</strong><span id="progress-text">未开始</span></p>
         <div class="progress">
             <div class="progress-bar" id="progress-bar"></div>
         </div>
         <div class="test-info">
-            <p><strong>📊Test Description:</strong>The current optimization method only tests network latency, primarily evaluating connection responsiveness, and does not include bandwidth speed testing. Latency testing can quickly identify the fastest-responding IP nodes and is suitable for initial optimization in daily use scenarios.</p>
+            <p><strong>📊 测试说明：</strong>当前优选方式仅进行网络延迟测试，主要评估连接响应速度，并未包含带宽速度测试。延迟测试可快速筛选出响应最快的IP节点，适合日常使用场景的初步优选。</p>
         </div>
     </div>
     
     <div class="warm-tips" id="warm-tips">
-        <h3>💡 Warm Tips</h3>
-        <p><strong>The optimization is completed but the test "True Connection Latency" is -1? This is most likely because your network operator is blocking your request.</p>
-        <p><strong>Try follow solutions:</strong></p>
+        <h3>💡 温馨提示</h3>
+        <p><strong>优选完成但测试"真连接延迟"为 -1？</strong>这很有可能是您的网络运营商对你的请求进行了阻断。</p>
+        <p><strong>建议尝试以下解决方案：</strong></p>
         <ul>
-            <li><strong>change port:</strong>Try to use othert portssuch as 2053,2083,2087,2096,8443.</li>
-            <li><strong>change IP pool:</strong>Switch to a different IP source (Community list, AS13335, AS209242 list, etc., but if you don't understand what AS24429 and AS199524 mean, don't choose them.)</li>
-            <li><strong>switch to costom domain:</strong>If you are still using free domain, youshould switch to a costom one.</li>
+            <li><strong>更换端口：</strong>尝试使用其他端口（如 2053、2083、2087、2096、8443）</li>
+            <li><strong>更换IP库：</strong>切换到不同的IP来源（CM整理列表、AS13335、AS209242列表等，但如果你不明白AS24429和AS199524意味着什么，那就不要选。）</li>
+            <li><strong>更换自定义域名：</strong>如果您使用的还是免费域名，那么您更应该尝试一下更换自定义域</li>
         </ul>
-        <p>💡 <strong>tip:</strong>Support for various ports may vary in different regions and network environments. You can usually find a suitable IP by trying several port combinations.</p>
+        <p>💡 <strong>小贴士：</strong>不同地区和网络环境对各端口的支持情况可能不同，多尝试几个端口组合通常能找到适合的IP。</p>
     </div>
 
     <div class="test-controls">
         <div class="port-selector">
-            <label for="ip-source-select">IP pool：</label>
+            <label for="ip-source-select">IP库：</label>
             <select id="ip-source-select">
-                <option value="official">Cloudflare Offcial List</option>
-                <option value="cm">Community List</option>
-                <option value="as13335">AS13335 list</option>
-                <option value="as209242">AS209242 list</option>
-                <option value="as24429">AS24429 list(Alibaba)</option>
-                <option value="as199524">AS199524 list(G-Core)</option>
-                <option value="proxyip">proxyip list</option>
+                <option value="official">CF官方列表</option>
+                <option value="cm">CM整理列表</option>
+                <option value="as13335">AS13335列表</option>
+                <option value="as209242">AS209242列表</option>
+                <option value="as24429">AS24429列表(Alibaba)</option>
+                <option value="as199524">AS199524列表(G-Core)</option>
+                <option value="proxyip">反代IP列表</option>
             </select>
 
-            <label for="port-select" style="margin-left: 20px;">Port: </label>
+            <label for="port-select" style="margin-left: 20px;">端口：</label>
             <select id="port-select">
                 <option value="443">443</option>
                 <option value="2053">2053</option>
@@ -3477,17 +3477,17 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             </select>
         </div>
         <div class="button-group">
-            <button class="test-button" id="test-btn" onclick="startTest()">Start delay test</button>
-            <button class="save-button" id="save-btn" onclick="saveIPs()" disabled>Overwrite Preferred IP</button>
-            <button class="append-button" id="append-btn" onclick="appendIPs()" disabled>Add Preferred IP</button>
-            <button class="edit-button" id="edit-btn" onclick="goEdit()">Edit Preferred List</button>
-            <button class="back-button" id="back-btn" onclick="goBack()">Return</button>
+            <button class="test-button" id="test-btn" onclick="startTest()">开始延迟测试</button>
+            <button class="save-button" id="save-btn" onclick="saveIPs()" disabled>覆盖保存优选IP</button>
+            <button class="append-button" id="append-btn" onclick="appendIPs()" disabled>追加保存优选IP</button>
+            <button class="edit-button" id="edit-btn" onclick="goEdit()">编辑优选列表</button>
+            <button class="back-button" id="back-btn" onclick="goBack()">返回配置页</button>
         </div>
         <div class="save-warning">
-            <small>⚠️ Important reminder: "Overwrite Preferred IP" will completely overwrite the current addresses/ADD preferred content, please consider carefully! It is recommended to use the "Append Preferred IP" function first.</small>
+            <small>⚠️ 重要提醒："覆盖保存优选IP"会完全覆盖当前 addresses/ADD 优选内容，请慎重考虑！建议优先使用"追加保存优选IP"功能。</small>
         </div>
         <div class="save-tip">
-            <strong>💡Saving Tip: The [<strong>Overwrite Preferred IPs<strong>] and [<strong>Add Preferred IPs<strong>] functions will only save the top 16 preferred IPs with the lowest latency. To add more IPs or customize your list, use the [<strong>Edit Preferred List<strong>] function.
+            <strong>💡 保存提示：</strong>[<strong>覆盖保存优选IP</strong>] 和 [<strong>追加保存优选IP</strong>] 功能仅会保存延迟最低的<strong>前16个优选IP</strong>。如需添加更多IP或进行自定义编辑，请使用 [<strong>编辑优选列表</strong>] 功能。
         </div>
         <div id="message" class="message"></div>
     </div>
@@ -3496,10 +3496,10 @@ async function bestIP(request, env, txt = 'ADD.txt') {
     <div class="ip-display-info" id="ip-display-info"></div>
     <div id="region-filter" style="margin:  0; display: none;"></div>
     <div class="ip-list" id="ip-list">
-        <div class="ip-item">Please choose port and IP list, then click"Start delay test" to load IP list.</div>
+        <div class="ip-item">请选择端口和IP库，然后点击"开始延迟测试"加载IP列表</div>
     </div>
     <div class="show-more-section" id="show-more-section" style="display: none;">
-        <button class="show-more-btn" id="show-more-btn" onclick="toggleShowMore()">Display more</button>
+        <button class="show-more-btn" id="show-more-btn" onclick="toggleShowMore()">显示更多</button>
     </div>
     
     <script>
@@ -3602,7 +3602,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             const ipDisplayInfo = document.getElementById('ip-display-info');
             
             if (originalIPs.length === 0) {
-                ipList.innerHTML = '<div class="ip-item">Fail to load IP list, try again.</div>';
+                ipList.innerHTML = '<div class="ip-item">加载IP列表失败，请重试</div>';
                 showMoreSection.style.display = 'none';
                 ipDisplayInfo.textContent = '';
                 return;
@@ -3613,14 +3613,14 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             
             // 更新显示信息
             if (originalIPs.length <= 16) {
-                ipDisplayInfo.textContent = \`Display all \${originalIPs.length} IP(s)\`;
+                ipDisplayInfo.textContent = \`显示全部 \${originalIPs.length} 个IP\`;
                 showMoreSection.style.display = 'none';
             } else {
-                ipDisplayInfo.textContent = \`Display IPs before \${displayCount}th IP, loaded \${originalIPs.length} IP in total.\`;
+                ipDisplayInfo.textContent = \`显示前 \${displayCount} 个IP，共加载 \${originalIPs.length} 个IP\`;
                 // 只在非测试状态下显示"显示更多"按钮
                 if (currentDisplayType !== 'testing') {
                     showMoreSection.style.display = 'block';
-                    showMoreBtn.textContent = showingAll ? 'Display less' : 'Display more';
+                    showMoreBtn.textContent = showingAll ? '显示更少' : '显示更多';
                     showMoreBtn.disabled = false;
                 } else {
                     showMoreSection.style.display = 'none';
@@ -3697,7 +3697,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             }
             
             if (ipsToSave.length === 0) {
-                showMessage('No IP results to save', 'error');
+                showMessage('没有可保存的IP结果', 'error');
                 return;
             }
             
@@ -3706,7 +3706,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             
             // 禁用所有按钮
             disableAllButtons();
-            saveBtn.textContent = 'Saving...';
+            saveBtn.textContent = '保存中...';
             
             try {
                 // 只保存前16个最优IP
@@ -3724,13 +3724,13 @@ async function bestIP(request, env, txt = 'ADD.txt') {
                 const data = await response.json();
                 
                 if (data.success) {
-                    showMessage(data.message + '（added IPs before the ' + saveCount + 'th IP）', 'success');
+                    showMessage(data.message + '（已保存前' + saveCount + '个最优IP）', 'success');
                 } else {
-                    showMessage(data.error || 'Fail to save', 'error');
+                    showMessage(data.error || '保存失败', 'error');
                 }
                 
             } catch (error) {
-                showMessage('Fail to save: ' + error.message, 'error');
+                showMessage('保存失败: ' + error.message, 'error');
             } finally {
                 saveBtn.textContent = originalText;
                 enableButtons();
@@ -3749,7 +3749,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             }
             
             if (ipsToAppend.length === 0) {
-                showMessage('No IP results to add, 'error');
+                showMessage('没有可追加的IP结果', 'error');
                 return;
             }
             
@@ -3758,7 +3758,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             
             // 禁用所有按钮
             disableAllButtons();
-            appendBtn.textContent = 'Adding...';
+            appendBtn.textContent = '追加中...';
             
             try {
                 // 只追加前16个最优IP
@@ -3776,13 +3776,13 @@ async function bestIP(request, env, txt = 'ADD.txt') {
                 const data = await response.json();
                 
                 if (data.success) {
-                    showMessage(data.message + '（added IPs before the ' + saveCount + 'th IP）', 'success');
+                    showMessage(data.message + '（已追加前' + saveCount + '个最优IP）', 'success');
                 } else {
-                    showMessage(data.error || 'Fail to add', 'error');
+                    showMessage(data.error || '追加失败', 'error');
                 }
                 
             } catch (error) {
-                showMessage('Fail to add: ' + error.message, 'error');
+                showMessage('追加失败: ' + error.message, 'error');
             } finally {
                 appendBtn.textContent = originalText;
                 enableButtons();
@@ -3815,13 +3815,13 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             for (let attempt = 1; attempt <= 3; attempt++) {
                 const result = await singleTest(parsedIP.host, parsedIP.port, timeout);
                 if (result) {
-                    console.log(\`IP \${parsedIP.host}:\${parsedIP.port} The \${attempt}th test passed: \${result.latency}ms, colo: \${result.colo}, Type: \${result.type}\`);
+                    console.log(\`IP \${parsedIP.host}:\${parsedIP.port} 第\${attempt}次测试成功: \${result.latency}ms, colo: \${result.colo}, 类型: \${result.type}\`);
                     
                     // 根据colo字段获取国家代码
                     const locationCode = cloudflareLocations[result.colo] ? cloudflareLocations[result.colo].cca2 : result.colo;
                     
                     // 生成显示格式
-                    const typeText = result.type === 'official' ? 'Offical Selection' : 'proxyip';
+                    const typeText = result.type === 'official' ? '官方优选' : '反代优选';
                     const display = \`\${parsedIP.host}:\${parsedIP.port}#\${locationCode} \${typeText} \${result.latency}ms\`;
                     
                     return {
@@ -3835,7 +3835,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
                         display: display
                     };
                 } else {
-                    console.log(\`IP \${parsedIP.host}:\${parsedIP.port} The \${attempt}th test failed.\`);
+                    console.log(\`IP \${parsedIP.host}:\${parsedIP.port} 第\${attempt}次测试失败\`);
                     if (attempt < 3) {
                         // 短暂延迟后重试
                         await new Promise(resolve => setTimeout(resolve, 200));
@@ -3880,7 +3880,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
                     comment: comment ? comment.trim() : null
                 };
             } catch (error) {
-                console.error('ERROR during An:', ipString, error);
+                console.error('解析IP格式失败:', ipString, error);
                 return null;
             }
         }
@@ -3905,7 +3905,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
                 clearTimeout(timeoutId);
             } catch (preRequestError) {
                 // 预请求失败可以忽略，继续进行正式测试
-                console.log('Pre-request failed: (' + ip + ':' + port + '):', preRequestError.message);
+                console.log('预请求失败 (' + ip + ':' + port + '):', preRequestError.message);
             }
             
             // 正式延迟测试
@@ -4017,7 +4017,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
                     // 更新进度
                     const progress = (completedTests / totalIPs) * 100;
                     progressBar.style.width = progress + '%';
-                    progressText.textContent = \`\${completedTests}/\${totalIPs} (\${progress.toFixed(1)}%) - Valid IP: \${results.length}\`;
+                    progressText.textContent = \`\${completedTests}/\${totalIPs} (\${progress.toFixed(1)}%) - 有效IP: \${results.length}\`;
                 }
             }
             
@@ -4051,14 +4051,14 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             localStorage.setItem(StorageKeys.IP_SOURCE, selectedIPSource);
             
             testBtn.disabled = true;
-            testBtn.textContent = 'Loading IP list(s)...';
+            testBtn.textContent = '加载IP列表...';
             portSelect.disabled = true;
             ipSourceSelect.disabled = true;
             testResults = [];
             displayedResults = []; // 重置显示结果
             showingAll = false; // 重置显示状态
             currentDisplayType = 'loading'; // 设置当前显示类型
-            ipList.innerHTML = '<div class="ip-item">Loading IP list(s)...</div>';
+            ipList.innerHTML = '<div class="ip-item">正在加载IP列表，请稍候...</div>';
             ipDisplayInfo.textContent = '';
             showMoreSection.style.display = 'none';
             updateButtonStates(); // 更新按钮状态
@@ -4070,16 +4070,16 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             let ipSourceName = '';
             switch(selectedIPSource) {
                 case 'official':
-                    ipSourceName = 'CF Official';
+                    ipSourceName = 'CF官方';
                     break;
                 case 'cm':
-                    ipSourceName = 'Community';
+                    ipSourceName = 'CM整理';
                     break;
                 case 'as13335':
-                    ipSourceName = 'CF All';
+                    ipSourceName = 'CF全段';
                     break;
                 case 'as209242':
-                    ipSourceName = 'CF Unofficial';
+                    ipSourceName = 'CF非官方';
                     break;
                 case 'as24429':
                     ipSourceName = 'Alibaba';
@@ -4088,25 +4088,25 @@ async function bestIP(request, env, txt = 'ADD.txt') {
                     ipSourceName = 'G-Core';
                     break;
                 case 'proxyip':
-                    ipSourceName = 'Reverse Proxy IP';
+                    ipSourceName = '反代IP';
                     break;
                 default:
-                    ipSourceName = 'Unknown';
+                    ipSourceName = '未知';
             }
             
-            progressText.textContent = 'Loading' + ipSourceName + ' IP list...';
+            progressText.textContent = '正在加载 ' + ipSourceName + ' IP列表...';
             
             // 加载IP列表
             originalIPs = await loadIPs(selectedIPSource, selectedPort);
 
             if (originalIPs.length === 0) {
-                ipList.innerHTML = '<div class="ip-item">Fail to load IP list, please try again.</div>';
+                ipList.innerHTML = '<div class="ip-item">加载IP列表失败，请重试</div>';
                 ipCount.textContent = '0 个';
                 testBtn.disabled = false;
-                testBtn.textContent = 'Starting delay test...';
+                testBtn.textContent = '开始延迟测试';
                 portSelect.disabled = false;
                 ipSourceSelect.disabled = false;
-                progressText.textContent = 'Fail to load';
+                progressText.textContent = '加载失败';
                 return;
             }
             
@@ -4117,8 +4117,8 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             displayLoadedIPs();
             
             // 开始测试
-            testBtn.textContent = 'Testing...';
-            progressText.textContent = 'Stat testing port: ' + selectedPort + '...';
+            testBtn.textContent = '测试中...';
+            progressText.textContent = '开始测试端口 ' + selectedPort + '...';
             currentDisplayType = 'testing'; // 切换到测试状态
             
             // 在测试开始时隐藏显示更多按钮
@@ -4139,10 +4139,10 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             createRegionFilter();
             
             testBtn.disabled = false;
-            testBtn.textContent = 'Retry';
+            testBtn.textContent = '重新测试';
             portSelect.disabled = false;
             ipSourceSelect.disabled = false;
-            progressText.textContent = 'Success - Valid IP: ' + testResults.length + '/' + originalIPs.length + ' (Port: ' + selectedPort + ', IP Pool: ' + ipSourceName + ')';
+            progressText.textContent = '完成 - 有效IP: ' + testResults.length + '/' + originalIPs.length + ' (端口: ' + selectedPort + ', IP库: ' + ipSourceName + ')';
         }
         
         // 新增：加载IP列表的函数
@@ -4153,13 +4153,13 @@ async function bestIP(request, env, txt = 'ADD.txt') {
                 });
                 
                 if (!response.ok) {
-                    throw new Error('Fail to load IPs');
+                    throw new Error('Failed to load IPs');
                 }
                 
                 const data = await response.json();
                 return data.ips || [];
             } catch (error) {
-                console.error('Fail to load IP list(s):', error);
+                console.error('加载IP列表失败:', error);
                 return [];
             }
         }
@@ -4172,7 +4172,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             const ipDisplayInfo = document.getElementById('ip-display-info');
             
             if (testResults.length === 0) {
-                ipList.innerHTML = '<div class="ip-item">Cannot find valid IP</div>';
+                ipList.innerHTML = '<div class="ip-item">未找到有效的IP</div>';
                 resultCount.textContent = '';
                 ipDisplayInfo.textContent = '';
                 showMoreSection.style.display = 'none';
@@ -4187,14 +4187,14 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             
             // 更新结果计数显示
             if (testResults.length <= 16) {
-                resultCount.textContent = '(There is/are ' + testResults.length + ' Valid IP(s) in total.)';
-                ipDisplayInfo.textContent = 'Display all ' + testResults.length + ' results';
+                resultCount.textContent = '(共测试出 ' + testResults.length + ' 个有效IP)';
+                ipDisplayInfo.textContent = '显示全部 ' + testResults.length + ' 个测试结果';
                 showMoreSection.style.display = 'none';
             } else {
-                resultCount.textContent = '(There is/are ' + testResults.length + ' Valid IP(s) in total.)';
-                ipDisplayInfo.textContent = 'Display all result(s) before ' + maxDisplayCount + ' th one, there is ' + testResults.length + ' valid IP in total.';
+                resultCount.textContent = '(共测试出 ' + testResults.length + ' 个有效IP)';
+                ipDisplayInfo.textContent = '显示前 ' + maxDisplayCount + ' 个测试结果，共 ' + testResults.length + ' 个有效IP';
                 showMoreSection.style.display = 'block';
-                showMoreBtn.textContent = showingAll ? 'Display less' : 'Display more';
+                showMoreBtn.textContent = showingAll ? '显示更少' : '显示更多';
                 showMoreBtn.disabled = false; // 确保在结果显示时启用按钮
             }
             
@@ -4225,8 +4225,8 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             }
             
             // 创建筛选按钮
-            let filterHTML = '<h3>Region Select：</h3><div class="region-buttons">';
-            filterHTML += '<button class="region-btn active" data-region="all">all (' + testResults.length + ')</button>';
+            let filterHTML = '<h3>地区筛选：</h3><div class="region-buttons">';
+            filterHTML += '<button class="region-btn active" data-region="all">全部 (' + testResults.length + ')</button>';
             
             uniqueRegions.forEach(region => {
                 const count = testResults.filter(r => r.locationCode === region).length;
@@ -4270,7 +4270,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             const ipDisplayInfo = document.getElementById('ip-display-info');
             
             if (displayedResults.length === 0) {
-                ipList.innerHTML = '<div class="ip-item">Cannot find valid IP</div>';
+                ipList.innerHTML = '<div class="ip-item">未找到有效的IP</div>';
                 resultCount.textContent = '';
                 ipDisplayInfo.textContent = '';
                 showMoreSection.style.display = 'none';
@@ -4287,14 +4287,14 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             const filteredCount = displayedResults.length;
             
             if (filteredCount <= 16) {
-                resultCount.textContent = '(There is/are ' + totalCount + ' valid IP(s) in total, there is/are ' + filteredCount + ' been selected.)';
-                ipDisplayInfo.textContent = 'Display all ' + filteredCount + ' result(s)';
+                resultCount.textContent = '(共测试出 ' + totalCount + ' 个有效IP，筛选出 ' + filteredCount + ' 个)';
+                ipDisplayInfo.textContent = '显示全部 ' + filteredCount + ' 个筛选结果';
                 showMoreSection.style.display = 'none';
             } else {
-                resultCount.textContent = '(There is/are ' + totalCount + ' valid IP(s) in total, there is/are ' + filteredCount + ' been selected.)';
-                ipDisplayInfo.textContent = 'Display all results before the ' + maxDisplayCount + 'th results, there is ' + filteredCount + ' in total';
+                resultCount.textContent = '(共测试出 ' + totalCount + ' 个有效IP，筛选出 ' + filteredCount + ' 个)';
+                ipDisplayInfo.textContent = '显示前 ' + maxDisplayCount + ' 个筛选结果，共 ' + filteredCount + ' 个';
                 showMoreSection.style.display = 'block';
-                showMoreBtn.textContent = showingAll ? 'Display less' : 'Display more';
+                showMoreBtn.textContent = showingAll ? '显示更少' : '显示更多';
                 showMoreBtn.disabled = false;
             }
             
@@ -4353,7 +4353,7 @@ async function getUsage(accountId, email, apikey, apitoken, all = 100000) {
      * @returns {string} 账户ID
      */
     async function getAccountId(email, apikey) {
-        console.log('Fetching user infos...');
+        console.log('正在获取账户信息...');
 
         const response = await fetch("https://api.cloudflare.com/client/v4/accounts", {
             method: "GET",
@@ -4366,8 +4366,8 @@ async function getUsage(accountId, email, apikey, apitoken, all = 100000) {
 
         if (!response.ok) {
             const errorText = await response.text();
-            console.error(`ERROR: ${response.status} ${response.statusText}`, errorText);
-            throw new Error(`Cloudflare API ERROR: ${response.status} ${response.statusText} - ${errorText}`);
+            console.error(`获取账户信息失败: ${response.status} ${response.statusText}`, errorText);
+            throw new Error(`Cloudflare API 请求失败: ${response.status} ${response.statusText} - ${errorText}`);
         }
 
         const res = await response.json();
@@ -4378,7 +4378,7 @@ async function getUsage(accountId, email, apikey, apitoken, all = 100000) {
 
         // 如果有多个账户，智能匹配包含邮箱前缀的账户
         if (res?.result && res.result.length > 1) {
-            console.log(`We have found ${res.result.length} accounts, auto analysing...`);
+            console.log(`发现 ${res.result.length} 个账户，正在智能匹配...`);
 
             // 提取邮箱前缀并转为小写
             const emailPrefix = email.toLowerCase();
@@ -4393,7 +4393,7 @@ async function getUsage(accountId, email, apikey, apitoken, all = 100000) {
                 if (accountName.startsWith(emailPrefix)) {
                     accountIndex = i;
                     foundMatch = true;
-                    console.log(`✅ Matched account detected, use the ${i}th account`);
+                    console.log(`✅ 找到匹配账户，使用第 ${i} 个账户`);
                     break;
                 }
             }
@@ -4410,10 +4410,10 @@ async function getUsage(accountId, email, apikey, apitoken, all = 100000) {
         const name = res?.result?.[accountIndex]?.name;
         const id = res?.result?.[accountIndex]?.id;
 
-        console.log(`Selected account: ${accountIndex} - name: ${name}, ID: ${id}`);
+        console.log(`最终选择账户 ${accountIndex} - 名称: ${name}, ID: ${id}`);
 
         if (!id) {
-            throw new Error("cannot find valid user ID, please check API permission.");
+            throw new Error("找不到有效的账户ID，请检查API权限");
         }
 
         return id;
@@ -4422,7 +4422,7 @@ async function getUsage(accountId, email, apikey, apitoken, all = 100000) {
     try {
         // 如果没有提供账户ID，就自动获取
         if (!accountId) {
-            console.log('cannot find provided user ID,getting...');
+            console.log('未提供账户ID，正在自动获取...');
             accountId = await getAccountId(email, apikey);
         }
 
@@ -4565,8 +4565,5 @@ async function nginx() {
 	`
     return text;
 }
-
-
-
 
 
