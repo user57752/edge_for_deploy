@@ -3446,7 +3446,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
         <p><strong>The optimization is completed but the test "True Connection Latency" is -1? This is most likely because your network operator is blocking your request.</p>
         <p><strong>Try follow solutions:</strong></p>
         <ul>
-            <li><strong>change port:</strong>Try to use othert portssuch as 2053,2083,2087,2096,443.</li>
+            <li><strong>change port:</strong>Try to use othert portssuch as 2053,2083,2087,2096,8443.</li>
             <li><strong>change IP pool:</strong>Switch to a different IP source (Community list, AS13335, AS209242 list, etc., but if you don't understand what AS24429 and AS199524 mean, don't choose them.)</li>
             <li><strong>switch to costom domain:</strong>If you are still using free domain, youshould switch to a costom one.</li>
         </ul>
@@ -3487,7 +3487,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
             <small>⚠️ Important reminder: "Overwrite Preferred IP" will completely overwrite the current addresses/ADD preferred content, please consider carefully! It is recommended to use the "Append Preferred IP" function first.</small>
         </div>
         <div class="save-tip">
-            <strong>💡Saving Tip: The [Overwrite Preferred IPs] and [Add Preferred IPs] functions will only save the top 16 preferred IPs with the lowest latency. To add more IPs or customize your list, use the [Edit Preferred List] function.
+            <strong>💡Saving Tip: The [<strong>Overwrite Preferred IPs<strong>] and [<strong>Add Preferred IPs<strong>] functions will only save the top 16 preferred IPs with the lowest latency. To add more IPs or customize your list, use the [<strong>Edit Preferred List<strong>] function.
         </div>
         <div id="message" class="message"></div>
     </div>
@@ -4194,7 +4194,7 @@ async function bestIP(request, env, txt = 'ADD.txt') {
                 resultCount.textContent = '(There is/are ' + testResults.length + ' Valid IP(s) in total.)';
                 ipDisplayInfo.textContent = 'Display all result(s) before ' + maxDisplayCount + ' th one, there is ' + testResults.length + ' valid IP in total.';
                 showMoreSection.style.display = 'block';
-                showMoreBtn.textContent = showingAll ? 'Display more' : 'Display less';
+                showMoreBtn.textContent = showingAll ? 'Display less' : 'Display more';
                 showMoreBtn.disabled = false; // 确保在结果显示时启用按钮
             }
             
@@ -4565,6 +4565,7 @@ async function nginx() {
 	`
     return text;
 }
+
 
 
 
