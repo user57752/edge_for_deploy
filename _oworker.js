@@ -2,7 +2,7 @@
 import { connect } from 'cloudflare:sockets';
 
 let userID = '';
-let proxyIP = '';
+let proxyIP = 'ProxyIP.SE.CMLiussss.net';
 let DNS64Server = '';
 //let sub = '';
 let subConverter = atob('U1VCQVBJLkNNTGl1c3Nzcy5uZXQ=');
@@ -4565,5 +4565,6 @@ async function nginx() {
 	`
     return text;
 }
+
 
 
